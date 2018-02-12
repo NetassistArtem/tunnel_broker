@@ -23,23 +23,15 @@ class Auth extends  ActiveRecord{
         if(!empty($auth_data)){
             $auth = new Auth();
             $auth->user_id = $auth_data['user_id'];
-            $auth->ip = ip2long($auth_data['ip']) ;
+            $auth->ip_real = ip2long($auth_data['ip_real']) ;
+            $auth->ip_db = $auth_data['ip_db'] ;
             $auth->ip_forwarded = ip2long($auth_data['ip_forwarded']) ;
+            $auth->email = $auth_data['email'];
+            $auth->created_at = time();
             $auth->save();
         }
 
     }
 
-    public static function getAuthInfo(){
-        if(Yii::$app->user->isGuest){
-            return array();
-        }else{
-            $auth_data = array(
-                'user_id' => Yii::$app->user->id,
-                'ip' => Yii::$app->request->userIP,
-                'ip_forwarded' => isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR']: null,
-            );
-            return$auth_data;
-        }
-    }
+
 }

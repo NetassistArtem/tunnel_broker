@@ -86,6 +86,13 @@ class User extends ActiveRecord implements IdentityInterface
 //        return null;
     }
 
+    public static function findUserById($id){
+        return self::findOne(['id' => $id]);
+    }
+    public function getUserById($id){
+        return $this->findOne(['id' => $id]);
+    }
+
     public static function isUserExistByEmail($email){
 
         return self::findOne(['email' => $email])? true : false;
@@ -202,6 +209,7 @@ class User extends ActiveRecord implements IdentityInterface
         $new_user->auth_key = $this->generateAuthKey();
         $new_user->email = $new_mail->email;
         $new_user->ip = $new_mail->ip;
+        $new_user->created_at = time();
         $new_user->save();
 
 
@@ -231,5 +239,48 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return count($id_array)+1;
     }
+
+    public static function updateUserIp($user_id, $new_ip)
+    {
+
+        $user = self::findOne($user_id);
+        $user->ip =  ip2long($new_ip);
+
+        $user->update();
+       // Debugger::PrintR($user);
+       // Debugger::EhoBr(ip2long($new_ip));
+       // Debugger::testDie();
+
+    }
+
+    public static function deleteUser($user_id)
+    {
+        $user = self::findOne($user_id);
+        $user->delete();
+
+    }
+    public static function isAdmin()
+    {
+        $user_data = Yii::$app->session->get('user_data');
+        if(empty($user_data)){
+            return false;
+        }
+        return $user_data->admin ? true:false;
+    }
+
+    public static function getUsersList()
+    {
+        $users = self::find()->asArray()->all();
+
+        return $users;
+    }
+
+    public static function addAdminRules($user_id)
+    {
+        $user = self::findOne($user_id);
+        $user->admin = 1;
+        $user->update();
+    }
+
 
 }

@@ -32,8 +32,9 @@ class NewMails extends  ActiveRecord{
     public static function updateIpToken($email,$ip,$registration_token){
         $mail_data = self::getDataByEmail($email);
         if($mail_data){
-            $mail_data->ip = $ip;
+            $mail_data->ip = ip2long($ip);
             $mail_data->registration_token = $registration_token;
+            $mail_data->created_at = time();
             $mail_data->save();
         }
 
@@ -41,11 +42,12 @@ class NewMails extends  ActiveRecord{
 
     public static function newMail( $email, $ip, $registration_token){
 
-            $auth = new NewMails();
-            $auth->email = $email;
-            $auth->ip = ip2long($ip) ;
-            $auth->registration_token = $registration_token ;
-            $auth->save();
+            $new_mail = new NewMails();
+            $new_mail->email = $email;
+            $new_mail->ip = ip2long($ip) ;
+            $new_mail->registration_token = $registration_token ;
+            $new_mail->created_at = time();
+            $new_mail->save();
 
 
     }
@@ -89,14 +91,12 @@ class NewMails extends  ActiveRecord{
 
     public static function removeOldEmails()
     {
-        $sql_query = '';
-        Yii::$app->db->createCommand($sql_query)->execute();
+        $params = array(
+            ':time_now' => time() - Yii::$app->params['registrationTokenExpire']
+        );
 
-
-        $data = self::find()->where(['<',self::toTimestamp('created_at'), time()])->one();
-        $data->delete();
-
-        return $data;
+        $sql_query = 'DELETE FROM  `new_mails` WHERE    `created_at` < :time_now ';
+        Yii::$app->db->createCommand($sql_query)->bindValues($params)->execute();
 
     }
 

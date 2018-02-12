@@ -1,23 +1,31 @@
 <?php
-
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
 use app\components\debugger\Debugger;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'NetAssist IPv6 Tunnel Broker';
+$this->title = 'View and Edit user: '.$user_data->email;
 
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row margin-bottom-3" >
+        <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-2 col-md-2 col-lg-2" >
+            <a href="/admin-panel/user-delete" onclick="return confirm('Are you sure you want to delete account <?= $user_data->email  ?>?')"
+               class="btn btn-danger btn-lg">Delete account</a>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2" >
+            <a href="#" class="btn btn-primary btn-lg">Actions history</a>
+        </div>
+    </div>
+
+
 
     <div class="col-sm-12 col-md-12 col-lg-12">
         <table id="table-services" class="table table-bordered table-hover table-custom">
             <thead>
             <tr>
-                <th colspan="3"><h3>Your NetAssist IPv6 Tunnel Broker details</h3></th>
+                <th colspan="3"><h3>Details</h3></th>
             </tr>
             </thead>
             <tbody>
@@ -115,7 +123,7 @@ $this->title = 'NetAssist IPv6 Tunnel Broker';
         <table id="table-services" class="table table-bordered table-hover table-custom">
             <thead>
             <tr>
-                <th colspan="4"><h3>Set reverse (backresolve) DNS</h3></th>
+                <th colspan="4"><h3>Reverse (backresolve) DNS</h3></th>
             </tr>
             </thead>
             <tbody>
@@ -238,10 +246,7 @@ $this->title = 'NetAssist IPv6 Tunnel Broker';
         <?php echo '';// Pjax::end(); ?>
     </div>
 
-    <div class="center">
-        <a href="/account-delete" onclick="return confirm('Are you sure you want to delete your account?')"
-           class="btn btn-danger btn-lg">Delete account</a>
-    </div>
+
 
 
 </div>

@@ -5,13 +5,15 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\components\debugger\Debugger;
+//use yii\web\User;
+use app\models\User;
 
 /**
  * ContactForm is the model behind the contact form.
  */
-class RdnsForm extends Model
+class DnsForm extends Model
 {
-    public $ptr;
+
     public $dns1;
     public $dns2;
 
@@ -23,9 +25,9 @@ class RdnsForm extends Model
     public function rules()
     {
         return [
-            [['ptr', 'dns1', 'dns2'], 'required'],
-            [['ptr', 'dns1', 'dns2'], 'trim'],
-            [['ptr', 'dns1', 'dns2'], 'dnsFilter'],
+            [['dns1', 'dns2'], 'required'],
+            [[ 'dns1', 'dns2'], 'trim'],
+            [[ 'dns1', 'dns2'], 'dnsFilter'],
         ];
     }
 
@@ -41,18 +43,17 @@ class RdnsForm extends Model
         }
     }
 
-    public function editRdns()
+    public function editDns(User  $user_data)
     {
         if ($this->validate()) {
             if(!Yii::$app->user->isGuest){
-                $data = array(
-                    'user_id' => Yii::$app->user->id,
-                    'ptr' => $this->ptr,
+                $data_dns = array(
                     'dns1' => $this->dns1,
                     'dns2' => $this->dns2,
+
                 );
 
-                Rdns::insertDNS($data);
+                Rdns::insertDNS($user_data, $data_dns);
                 return true;
             }else{
                 return false;

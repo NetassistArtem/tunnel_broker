@@ -30,5 +30,20 @@ return [
     'ipv6_base' => '2a01:d0',
     'ipv6_if_base' => '2a01:d0:ffff',
     'euid_index' => 32768,
+    'server_ipv4_address' => '62.205.132.12',
+    'ipv6_dns_server' => '2a01:d0::1',
+    'actions' => array(
+        1 => 'User registration full',
+        2 => 'Delete account',
+        3 => 'Change ip',
+        4 => 'Change e-mail',
+        5 => 'Change ip autho',
+        6 => 'Add DNS',
+        7 => 'Edit DNS',
+        8 => 'Add ptr',
+        9 => 'Edit ptr',
+        10 => 'User registration first step ',
+        11 => 'Add admins rules',
+    ),
 
 ];

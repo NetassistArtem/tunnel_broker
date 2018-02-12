@@ -62,7 +62,14 @@ class LoginForm extends Model
     {
         if ($this->validate()) {
           //  Debugger::testDie();
-            return Yii::$app->user->login($this->getUser(), Yii::$app->params['cookie_life']);
+
+            $user = $this->getUser();
+        //    if($user->admin){
+             //   Yii::$app->session->set('admin',1);
+
+                Yii::$app->session->set('user_data', $user);
+          //  }
+            return Yii::$app->user->login($user, Yii::$app->params['cookie_life']);
         }
         return false;
     }

@@ -10,9 +10,11 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\components\debugger\Debugger;
+use app\models\User;
 
 AppAsset::register($this);
 $flash = Yii::$app->session->getAllFlashes();
+$guest = Yii::$app->user->isGuest;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -32,7 +34,7 @@ $flash = Yii::$app->session->getAllFlashes();
     <?php
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/netAssist3.png', ['alt' => Yii::$app->name]),
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => '/main',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top custom-style-navbar',
         ],
@@ -40,6 +42,18 @@ $flash = Yii::$app->session->getAllFlashes();
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+          //  User::isAdmin() ? (
+                [
+                    'label' => 'Admin panel',
+                    'url' => ['/admin/admin-panel'],
+                    'visible' => User::isAdmin(),
+                    'linkOptions' => ['class' => 'admin-panel']
+                ],
+
+           // ) : ( ''
+
+           // ),
+
 
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/site/login']]
@@ -52,8 +66,25 @@ $flash = Yii::$app->session->getAllFlashes();
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ['label' => 'Information', 'url' => '/',
+                 'active' => (
+                  Yii::$app->request->url == "/dynamic-ip" ||
+                  Yii::$app->request->url == "/autonomous-system" ||
+                 Yii::$app->request->url == "/additional-services"
+                   ),
+                'items' => [
+                    ['label' => 'Dynamic IP', 'url' => '/dynamic-ip',],
+                    ['label' => 'Autonomous System', 'url' => "/autonomous-system",],
+                    ['label' => 'Additional services', 'url' => '/additional-services',],
+                    $guest ? ('') : (['label' => 'Configuration Examples', 'url' => ['/configuration-examples']]),
+
+                ]
+            ],
+
+
         ],
+
     ]);
     NavBar::end();
 
@@ -86,69 +117,11 @@ $flash = Yii::$app->session->getAllFlashes();
         </div>
 
 
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6 ">
-                <div class="panel panel-default custom-panel-style">
-                    <div class="panel-heading">
-                        <h3>Dynamic IP</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                            If you have the dynamic IP, you can use the auto-update endpoint URL:
-                            http(s)://tb.netassist.ua/autochangeip.php?l=YOURLOGIN&p=YOURPASSWORD&ip=YOURIP
-                            The update time is less than 60 seconds.
-                        </p>
 
-                    </div>
 
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="panel panel-default custom-panel-style">
-                    <div class="panel-heading">
-                        <h3>Autonomous System</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>
-                            If you have own Autonomous System and IPv6 address space - request BGP enabled tunnel via
-                            e-mail!
-                        </p>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1  col-sm-10 col-md-10 col-lg-10">
-                <div class="panel panel-default custom-panel-style">
-                    <div class="panel-heading">
-                        <h3>Additional services</h3>
-                    </div>
-                    <div class="panel-body">
-
-                        <ul>
-                            <li>
-                                IPv4/IPv6 transit from $0.3/mbit in Kiev, Lviv, Moscow, Warsaw and Frankfurt
-                            </li>
-                            <li>
-                                Dedicated servers - info@netassist.ua or +380442398999!
-                            </li>
-                            <li>
-                                Want to be IPv6 multihomed? Obtain own /48 provider independent IPv6+AS for only 300 EUR
-                                first year and 150 EUR next years payment!
-                            </li>
-                        </ul>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-5 col-md-5 col-lg-5">
-                <div class="panel panel-default custom-panel-style">
+                <div class="panel panel-default custom-panel-style footer-block-height">
                     <div class="panel-heading">
                         <h3>Contacts</h3>
                     </div>
@@ -162,7 +135,6 @@ $flash = Yii::$app->session->getAllFlashes();
                             <li>
                                 <p>24h duty emergency phones:</p>
                                 <p>+380(44)239-89-99</p>
-                                <p>+7(495)725-63-96</p>
 
                             </li>
                         </ul>
@@ -173,7 +145,7 @@ $flash = Yii::$app->session->getAllFlashes();
                 </div>
             </div>
             <div class="col-sm-7 col-md-7 col-lg-7">
-                <div class="panel panel-default custom-panel-style">
+                <div class="panel panel-default custom-panel-style footer-block-height">
                     <div class="panel-heading">
                         <h3>Donate</h3>
                     </div>
@@ -203,11 +175,11 @@ $flash = Yii::$app->session->getAllFlashes();
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer footer-custom">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; NetAssist <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+
     </div>
 </footer>
 

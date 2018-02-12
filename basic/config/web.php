@@ -8,8 +8,8 @@ $config = [
     'name' => 'NetAssist',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'homeUrl'=> '/main',
-    'defaultRoute' => 'site/main',
+    'homeUrl'=> '/index',
+    'defaultRoute' => 'site/index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -32,10 +32,29 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mail',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+
+
+
+
+//            'transport' => [
+//'class' => 'Swift_SmtpTransport',
+//'host' => 'smtp.google.com',
+//'username' => '',
+//'password' => '',
+//'port' => '465',
+//'encryption' => 'ssl',
+
+//],
+
+
+
+
+
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -87,8 +106,68 @@ $config = [
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
                 [
+                    'pattern' => 'index',
+                    'route' => 'site/index',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
                     'pattern' => 'contact',
                     'route' => 'site/contact',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'account-delete',
+                    'route' => 'site/delete-user',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'autochangeip',
+                    'route' => 'site/autochange-ip',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'confirm',
+                    'route' => 'site/confirm',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'dynamic-ip',
+                    'route' => 'site/dynamic-ip',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'autonomous-system',
+                    'route' => 'site/autonomous-system',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'additional-services',
+                    'route' => 'site/additional-services',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'configuration-examples',
+                    'route' => 'site/configuration-examples',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel',
+                    'route' => 'admin/admin-panel',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel/user-view',
+                    'route' => 'admin/user-view',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel/user-delete',
+                    'route' => 'admin/user-delete',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel/user-add-admin-rules',
+                    'route' => 'admin/user-add-admin-rules',
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
             ],
