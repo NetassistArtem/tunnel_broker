@@ -31,4 +31,5 @@ tests/_support/_generated
 
 # db connect data
 /config/db.php
+/config/db2.php
 

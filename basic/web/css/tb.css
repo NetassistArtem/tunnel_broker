@@ -1,9 +1,10 @@
-body{
-  /*  background-image: url(/basic/web/images/ipv6-background3.jpg);*/
+body {
+    /*  background-image: url(/basic/web/images/ipv6-background3.jpg);*/
     padding-top: 0;
     background: url(/basic/web/images/bg_body.gif) repeat top left;
     min-height: 100%;
 }
+
 /***********NavBar*************/
 
 .custom-style-navbar > div > div > a.navbar-brand {
@@ -11,26 +12,30 @@ body{
     padding: 1px 5px;
 }
 
-.custom-style-navbar, .footer-custom{
-   /* background-color:    #fbb529; */
-    background: linear-gradient(to right,#f4bb49 0%,#f4bb49 10%, #0a47ba 35%, #0a47ba 65%, #f4bb49 90%, #f4bb49 100%);
-    border-color: white;/* #080808; fbb71e*/
+.custom-style-navbar, .footer-custom {
+    /* background-color:    #fbb529; */
+    background: linear-gradient(to right, #f4bb49 0%, #f4bb49 10%, #0a47ba 35%, #0a47ba 65%, #f4bb49 90%, #f4bb49 100%);
+    border-color: white; /* #080808; fbb71e*/
 }
 
-.custom-style-navbar  button.logout, .custom-style-navbar .navbar-nav li a {
+.custom-style-navbar button.logout, .custom-style-navbar .navbar-nav li a {
     color: #0a47ba;
     font-weight: bolder;
     font-size: 1.4em;
 }
+
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     background-color: transparent;
 }
-.custom-style-navbar .navbar-nav li a.admin-panel{
+
+.custom-style-navbar .navbar-nav li a.admin-panel, .custom-style-navbar .navbar-nav li button.logout{
     color: #f4bb49;
 }
-.custom-style-navbar .navbar-nav li a.admin-panel :hover, .custom-style-navbar .navbar-nav > .active > a.admin-panel{
+
+.custom-style-navbar .navbar-nav li a.admin-panel :hover, .custom-style-navbar .navbar-nav > .active > a.admin-panel {
     color: white;
 }
+
 /*
 
 */
@@ -39,116 +44,270 @@ body{
 .donate-image {
     width: 55%;
 }
-.custom-panel-style > div.panel-body > div.donate-style{
+
+.custom-panel-style > div.panel-body > div.donate-style {
     text-align: center;
+
 }
-.btn-custom{
+
+.btn-custom {
     background-color: #fbb529;
     border-color: #e0a939;
     color: #0a47ba;
 }
+
 /*********footer**********/
 
-.empty-div{
+.empty-div {
     height: 30px;
 }
-.content-position{
+
+.content-position {
     margin-bottom: 50px;
 }
-.footer-block-height > .panel-body{
+
+.footer-block-height > .panel-body {
     height: 200px;
 }
-
-
+.margin-pot-2{
+    margin-top: 20px;
+}
+.form-webmony p{
+    text-align: center;
+}
 
 /********************/
-h1{
+h1 {
     margin-bottom: 30px;
     text-align: center;
 }
+
 .site-login div div h1, .site-request-password-reset div div h1, .site-reset-password div div h1 {
     margin-bottom: 1px;
     margin-top: 1px;
 }
+
 .custom-panel-style > div.panel-heading > h3, .custom-panel-style > div.panel-heading > h2 {
     margin-bottom: 1px;
     margin-top: 1px;
 }
 
-
-#login-form{
+#login-form {
     margin-top: 20px;
 }
-div.site-login, div.site-request-password-reset{
+
+div.site-login, div.site-request-password-reset {
     margin-top: 5%;
 }
-.custom-panel-style  > .panel-heading{
-    background-color: #0a47ba;      /* b7d0ff;*/
-  color: white;
+
+.custom-panel-style > .panel-heading {
+    background-color: #0a47ba; /* b7d0ff;*/
+    color: white;
     border-color: #9bbeff; /*04B45F;*/
 }
-.custom-panel-style{
+
+.custom-panel-style {
     border-color: #9bbeff; /*04B45F;*/
-    box-shadow: 0 0 9px #0a47ba;/*#cae2c7;*/
+    box-shadow: 0 0 9px #0a47ba; /*#cae2c7;*/
 }
-.custom-panel-style  > .panel-body{
+
+.custom-panel-style > .panel-body {
     background-color: #F2FBEF; /*f6ffe5;*/
 
 }
 
-.center{
+.center {
     text-align: center;
 }
-.margin-top-3{
+
+.margin-top-3 {
     margin-top: 10px;
 }
+
 .margin-bottom-3 {
     margin-bottom: 10px;
 }
 
-.color-b{
+.color-b {
     color: #fbb529;;
 }
+
 /***************Таблици*****************/
 
-.table-custom , .main-text{
+.table-custom, .main-text {
     border-color: #9bbeff;
     box-shadow: 0 0 9px #0a47ba;
 }
-.table-custom thead{
+
+.table-custom thead {
     border-color: #9bbeff;
-    background-color: #0a47ba;      /* b7d0ff;*/
+    background-color: #0a47ba; /* b7d0ff;*/
     color: white;
 }
+
 .table-custom tbody tr td {
     border-color: #9bbeff;
 }
-.table-custom tbody, .main-text{
+
+.table-custom tbody, .main-text {
     background-color: #F2FBEF;
 }
 
-.table-custom > thead > tr>th h3{
+.table-custom > thead > tr > th h3 {
 
     margin: 6px;
 }
-.change-custom{
+
+.change-custom {
     text-align: center;
-    background-color:#fbb529 ;
+    background-color: #fbb529;
     border: 1px solid #e0a939;
     color: #0a47ba;
 }
-.change-custom :hover{
 
-    background-color:#fbb529 ;
+.change-custom :hover {
+
+    background-color: #fbb529;
     border: 1px solid #e0a939;
     color: white;
 
 }
-.form-inside-styles{
+
+.form-inside-styles {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.main-text{
+
+.main-text {
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+/************************************/
+
+.infotext {
+    display: inline-block; /* Строчно-блочный элемент */
+    position: relative; /* Относительное позиционирование */
+}
+
+.infotext:hover::after {
+    content: attr(data-title); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 5%;
+    top: 30%; /* Положение подсказки */
+    z-index: 1; /* Отображаем подсказку поверх других элементов */
+    background: rgba(255, 255, 230, 0.9); /* Полупрозрачный цвет фона */
+/ / font-family: Arial, sans-serif; /* Гарнитура шрифта */
+    font-size: 11px; /* Размер текста подсказки */
+    padding: 5px 5px; /* Поля */
+    border: 1px solid #e0a939; /* Параметры рамки */
+    color: black;
+}
+
+/*******************Media******************/
+@media (min-width: 767px ) {
+    .logo {
+        width: 550px;
+    }
+
+    .custom-style-navbar, .footer-custom {
+        background: linear-gradient(to right, #f4bb49 0%, #f4bb49 10%, #0a47ba 35%, #0a47ba 65%, #f4bb49 90%, #f4bb49 100%);
+    }
+
+    .custom-style-navbar button.logout, .custom-style-navbar .navbar-nav li a {
+        color: #0a47ba;
+        font-size: 1.4em;
+    }
+
+    .donate-image {
+        width: 150px;
+    }
+
+
+
+
+}
+
+@media (max-width: 1200px ) {
+    .logo {
+        width: 400px;
+    }
+
+    .custom-style-navbar, .footer-custom {
+        background: linear-gradient(to right, #f4bb49 0%, #f4bb49 8%, #0a47ba 30%, #0a47ba 70%, #f4bb49 92%, #f4bb49 100%);
+    }
+
+    .custom-style-navbar button.logout, .custom-style-navbar .navbar-nav li a {
+        color: #0a47ba;
+        font-size: 1.3em;
+    }
+    .donate-image {
+        width: 110px;
+    }
+
+}
+
+@media (max-width: 992px ) {
+    .logo {
+        width: 350px;
+    }
+    .custom-style-navbar, .footer-custom {
+        background: linear-gradient(to right, #f4bb49 0%, #f4bb49 7%, #0a47ba 29%, #0a47ba 71%, #f4bb49 93%, #f4bb49 100%);
+    }
+
+    .custom-style-navbar button.logout, .custom-style-navbar .navbar-nav li a {
+        color: #0a47ba;
+        font-size: 1.1em;
+    }
+    .donate-image {
+        width: 100px;
+    }
+
+}
+
+@media (max-width: 767px ) {
+    .logo {
+        width: 260px;
+    }
+    .custom-style-navbar, .footer-custom {
+        background: linear-gradient(to right, #f4bb49 0%, #f4bb49 6%, #0a47ba 28%, #0a47ba 72%, #f4bb49 94%, #f4bb49 100%);
+    }
+
+    .custom-style-navbar button.logout, .custom-style-navbar .navbar-nav li a {
+        color: #0a47ba;
+        font-size: 1.1em;
+    }
+
+    .navbar-inverse .navbar-collapse{
+        background-color:#f4bb49 ;
+    }
+
+    .custom-style-navbar .navbar-nav li a.admin-panel, .custom-style-navbar .navbar-nav li button.logout{
+        color: #0a47ba;
+    }
+    .donate-image {
+        width: 80px;
+    }
+
+    .custom-panel-style > div.panel-body > div.donate-style {
+        text-align: left;
+        margin-bottom: 15px;
+
+    }
+    #table-services {
+        font-size: 0.8em;
+    }
+
+    h3{
+        font-size: 18px;
+    }
+    h1{
+        font-size: 22px;
+    }
+    .btn-change-user{
+        margin-left: 15px;
+        margin-bottom: 15px;
+    }
+
+}
+

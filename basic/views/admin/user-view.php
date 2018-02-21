@@ -15,7 +15,7 @@ $this->title = 'View and Edit user: '.$user_data->email;
                class="btn btn-danger btn-lg">Delete account</a>
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2" >
-            <a href="#" class="btn btn-primary btn-lg">Actions history</a>
+            <a href="/admin-panel/user-history" class="btn btn-primary btn-lg">Actions history</a>
         </div>
     </div>
 

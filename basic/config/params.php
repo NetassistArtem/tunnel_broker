@@ -44,6 +44,10 @@ return [
         9 => 'Edit ptr',
         10 => 'User registration first step ',
         11 => 'Add admins rules',
+        12 => 'Authentication',
+        13 => 'All',
     ),
+    'default_time_interval' => 2592000, //30 дней в секундах
+    'history_per_page' => 10,
 
 ];

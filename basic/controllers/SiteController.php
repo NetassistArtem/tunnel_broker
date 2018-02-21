@@ -22,6 +22,7 @@ use yii\web\BadRequestHttpException;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
 use app\models\RegistrationRequestForm;
+use app\models\EmailChangeRequestForm;
 use app\models\Actions;
 
 use app\components\debugger\Debugger;
@@ -117,12 +118,12 @@ class SiteController extends Controller
 
     private function getUserData()
     {
-        $session_data = Yii::$app->session->get('user_data');
+        $session_data = Yii::$app->session->get('user.user_data');
         if ($session_data) {
             return $session_data;
         } else {
             $user_data = User::findUserById(Yii::$app->user->id);
-            Yii::$app->session->set('user_data', $user_data);
+            Yii::$app->session->set('user.user_data', $user_data);
             return $user_data;
         }
     }
@@ -152,7 +153,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $user_data = Yii::$app->session->get('user_data');
+            $user_data = Yii::$app->session->get('user.user_data');
             $auth_data = array(
                 'user_id' => $user_data->id,
                 'ip_real' => Yii::$app->request->userIP,
@@ -274,12 +275,23 @@ class SiteController extends Controller
 
         $modelIpUpdate = new ipUpdateForm();
         if ($modelIpUpdate->load(Yii::$app->request->post()) && $modelIpUpdate->editIp($user_data)) {
-            Actions::insertAction($user_data, 5, $modelIpUpdate->ip);
-            Yii::$app->session->remove('user_data');
+            Actions::insertAction($user_data, 3, $modelIpUpdate->ip);
+            Yii::$app->session->remove('user.user_data');
             Yii::$app->session->setFlash('success', 'Your new ipV4 address are saved.');
             //   if (!Yii::$app->request->isPjax) {
             return $this->redirect(['/main']);
             // }
+        }
+
+        $modelEmailChangeRequest = new EmailChangeRequestForm();
+
+        if ($modelEmailChangeRequest->load(Yii::$app->request->post()) && $modelEmailChangeRequest->validate()) {
+            if ($modelEmailChangeRequest->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->redirect('/main');
+            } else {
+                Yii::$app->session->setFlash('warning', 'Sorry, we are unable to change e-mail.');
+            }
         }
 
 
@@ -294,7 +306,42 @@ class SiteController extends Controller
             'modelDns' => $modelDns,
             'modelPtr' => $modelPtr,
             'modelIpUpdate' => $modelIpUpdate,
+            'modelEmailChangeRequest' => $modelEmailChangeRequest,
         ]);
+    }
+
+    public function actionChangeEmail($token)
+    {
+        $data_new_mail = NewMails::findByRegistrationToken($token);
+        // Debugger::PrintR($data_new_mail);
+        // Debugger::testDie();
+        $user_id = Yii::$app->user->id;
+        $user = new User();
+        $user = $user->getUserById($user_id);
+        if ($data_new_mail && is_object($data_new_mail)) {
+            User::updateEmail($data_new_mail->email, Yii::$app->user->id);
+
+
+                Actions::insertAction($user, 4, 0, $data_new_mail->email );
+
+            Yii::$app->session->setFlash('success', 'Your e-mail is changed.');
+// удаление записи с адресом электоронной почты из таблици  new_mail
+                NewMails::removeData($data_new_mail->email);
+
+            $user_data = User::findUserById(Yii::$app->user->id);
+            Yii::$app->session->set('user.user_data', $user_data);
+            return $this->redirect('/main');
+
+
+
+        }else{
+
+            Yii::$app->session->setFlash('warning', 'Change e-mail token is not valid.');
+            return $this->redirect('/main');
+        }
+
+
+
     }
 
     /**

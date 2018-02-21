@@ -5,10 +5,10 @@ namespace app\models;
 use app\components\debugger\Debugger;
 use Yii;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 
 
-class User extends ActiveRecord implements IdentityInterface
+
+class MigrationUser extends ActiveRecord
 
 
 {
@@ -24,26 +24,16 @@ class User extends ActiveRecord implements IdentityInterface
     public $updated_at;
     public $password_reset_token;
 */
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+
+
+    public static function getDb()
+    {
+        return Yii::$app->db2;
+    }
 
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%users}}';
     }
 
 
@@ -55,20 +45,42 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id]);
     }
 
+    public static function getUsersList($n)
+    {
+        $from = ($n-1)*5000;
+        $to = $n*5000;
+        $users = self::find()->asArray()->where(['between', 'id', $from, $to])->all();
+
+        return $users;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * @inheritdoc
      */
+    /*
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return null;
     }
-
+*/
     /**
      * Finds user by username
      *
      * @param string $username
      * @return static|null
      */
+    /*
     public static function findByUsername($username)
     {
     //    foreach (self::$users as $user) {
@@ -102,71 +114,47 @@ class User extends ActiveRecord implements IdentityInterface
 
         return self::findOne(['ip' => ip2long($ip)])? true : false;
     }
-
+*/
     /**
      * @inheritdoc
      */
+    /*
     public function getId()
     {
         return $this->id;
     }
-
+*/
     /**
      * @inheritdoc
      */
+    /*
     public function getAuthKey()
     {
         return $this->auth_key;
     }
-
+*/
     /**
      * @inheritdoc
      */
+    /*
     public function validateAuthKey($authKey)
     {
         return $this->auth_key === $authKey;
     }
-
+*/
     /**
      * Validates password
      *
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
+    /*
     public function validatePassword($password)
     {
       //  Debugger::EhoBr('test');
        // Debugger::EhoBr($this->password_hash);
-
-       // Debugger::EhoBr($this->password);
-       // Debugger::EhoBr($this->username);
-       // Debugger::EhoBr($this->id);
-       // Debugger::EhoBr($this->password_old);
-       // Debugger::EhoBr('test');
        // Debugger::testDie();
-        if(!$this->password){
-            return $this->validateOldPassword($password,$this->username );
-        }
-
-
-
         return Yii::$app->security->validatePassword($password, $this->password);
-    }
-
-    public function validateOldPassword($password, $username){
-
-        $params = array(
-            ':username' => $username,
-            ':password' => $password,
-        );
-        $id_user = Yii::$app->db->createCommand("SELECT id FROM user WHERE username=:username AND password_old=SHA1(:password)")->bindValues($params)
-            ->queryOne();
-
-      //  Debugger::EhoBr($id_user);
-       // Debugger::PrintR($id_user);
-       // Debugger::testDie();
-        //вставить запрос альтера SELECT id FROM users WHERE login='".$user."' AND password=SHA1($password)
-        return $id_user;
     }
 
     public function setPassword($password)
@@ -241,18 +229,7 @@ class User extends ActiveRecord implements IdentityInterface
         $new_user->save();
 
 
-    /*
-    public $id;
-    public $username;
-    public $password;
-    public $auth_key;
-    //public $accessToken;
-    public $email;
-    public $ip;
-    public $created_at;
-    public $updated_at;
-    public $password_reset_token;
-*/
+
 
     }
     public static function updateEmail($new_email, $user_id){
@@ -302,12 +279,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $user_data->admin ? true:false;
     }
 
-    public static function getUsersList()
-    {
-        $users = self::find()->asArray()->all();
 
-        return $users;
-    }
 
     public static function addAdminRules($user_id)
     {
@@ -315,6 +287,6 @@ class User extends ActiveRecord implements IdentityInterface
         $user->admin = 1;
         $user->update();
     }
-
+*/
 
 }

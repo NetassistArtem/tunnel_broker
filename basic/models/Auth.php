@@ -14,9 +14,15 @@ class Auth extends  ActiveRecord{
         return '{{auth}}';
     }
 
-    public static function getUserAuth($user_id){
+    public static function getUserAuth($user_email, $time_from, $time_to)
+    {
+        $param_array = [];
 
-        return self::find()->asArray()->where(['user_id' => $user_id])->all();
+        if($user_email){
+            $param_array['email'] = $user_email;
+        }
+
+        return self::find()->asArray()->where($param_array)->andWhere(['between', 'created_at', $time_from, $time_to])->all();
     }
 
     public static function newAuth($auth_data){
@@ -32,6 +38,7 @@ class Auth extends  ActiveRecord{
         }
 
     }
+
 
 
 }

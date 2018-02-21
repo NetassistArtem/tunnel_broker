@@ -67,7 +67,7 @@ class LoginForm extends Model
         //    if($user->admin){
              //   Yii::$app->session->set('admin',1);
 
-                Yii::$app->session->set('user_data', $user);
+                Yii::$app->session->set('user.user_data', $user);
           //  }
             return Yii::$app->user->login($user, Yii::$app->params['cookie_life']);
         }

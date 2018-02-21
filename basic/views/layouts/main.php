@@ -33,7 +33,7 @@ $guest = Yii::$app->user->isGuest;
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/netAssist3.png', ['alt' => Yii::$app->name]),
+        'brandLabel' => Html::img('@web/images/netAssist3.png', ['alt' => Yii::$app->name, 'class' =>'logo', 'id' => 'logo']),
         'brandUrl' => '/main',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top custom-style-navbar',
@@ -56,7 +56,7 @@ $guest = Yii::$app->user->isGuest;
 
 
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'login-nav']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -67,7 +67,7 @@ $guest = Yii::$app->user->isGuest;
                 . Html::endForm()
                 . '</li>'
             ),
-            ['label' => 'Information', 'url' => '/',
+            ['label' => 'Information', 'url' => '/', 'linkOptions' => ['class' => 'info-nav'],
                  'active' => (
                   Yii::$app->request->url == "/dynamic-ip" ||
                   Yii::$app->request->url == "/autonomous-system" ||
@@ -155,12 +155,20 @@ $guest = Yii::$app->user->isGuest;
                             to maintain and improve it. Please, donate this project via PayPal or WebMoney:
                         </p>
                         <div class="col-sm-6 col-md-6 col-lg-6 donate-style">
-                            <a class="btn btn-primary btn-custom" href="#" role="button">Donate by PayPal </a>
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="7MT2KZ7RKE6W6">
+                                <input class="btn btn-primary btn-custom" type="submit"  border="0" value = "Donate by PayPal"  name="submit">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                            </form>
                             <img class="donate-image" src="/basic/web/images/paypal5.png" alt="">
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 donate-style">
-                            <a class="btn btn-primary btn-custom" href="#" role="button">Donate by WebMony </a>
+                            <button data-toggle="collapse" data-target='#web-many-donate' class="btn btn-primary btn-custom" href="#" role="button">Donate by WebMony </button>
                             <img class="donate-image" src="/basic/web/images/webmany5.png" alt="">
+                        </div>
+                        <div>
+
                         </div>
 
 
@@ -169,6 +177,46 @@ $guest = Yii::$app->user->isGuest;
                 </div>
             </div>
 
+        </div>
+        <div class="row collapse" id="web-many-donate" >
+            <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
+                <div class="panel panel-default custom-panel-style footer-block-height">
+                    <div class="panel-heading">
+                        <h3>Donate by WebMony</h3>
+                    </div>
+                    <div class="panel-body">
+
+
+
+                        <form class="form-webmony" action="https://merchant.webmoney.ru/lmi/payment.asp" method="post">
+                            <p ><strong>Thank you for supporting our project!</strong></p>
+                            <p>Please, enter amount in WMZ you wish to donate</p>
+                            <div class="form-group" >
+                                <label for="LMI_PAYMENT_AMOUNT" class="col-lg-3 col-md-3 col-sm-3 control-label" >Amount in WMZ</label>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" >
+                                    <input class="form-control" type="number" name="LMI_PAYMENT_AMOUNT" value="">
+                                </div>
+
+                            </div>
+                                <input type="hidden" name="LMI_PAYEE_PURSE" value="Z232943325580">
+                                <input type="hidden" name="LMI_PAYMENT_NO" value="1">
+                                <input type="hidden" name="LMI_PAYMENT_DESC" value="NetAssist IPv6 tunnel broker donation">
+                            <div class="form-group" >
+                                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
+                                    <button class="btn btn-primary btn-block btn-custom margin-pot-2" type="submit"  >Donate!</button>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
 

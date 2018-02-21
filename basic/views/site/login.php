@@ -12,7 +12,7 @@ $this->title = 'Login';
 ?>
 
 
-<div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-6 col-md-6 col-lg-6 site-login">
+<div class="col-sm-offset-2 col-md-offset-3 col-lg-offset-3 col-sm-8 col-md-6 col-lg-6 site-login">
     <div class="panel panel-default custom-panel-style" >
         <div class="panel-heading" >
             <h1><?= Html::encode($this->title) ?></h1>

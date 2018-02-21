@@ -1,7 +1,6 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
@@ -36,7 +35,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
 
 
 
@@ -65,7 +64,8 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => require(__DIR__ . '/db.php'),
+        'db2' => require (__DIR__ . '/db2.php'),
 
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -136,6 +136,11 @@ $config = [
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
                 [
+                    'pattern' => 'change-email',
+                    'route' => 'site/change-email',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
                     'pattern' => 'autonomous-system',
                     'route' => 'site/autonomous-system',
                     //'defaults' => ['page' => 1, 'tag' => ''],
@@ -168,6 +173,16 @@ $config = [
                 [
                     'pattern' => 'admin-panel/user-add-admin-rules',
                     'route' => 'admin/user-add-admin-rules',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel/user-history',
+                    'route' => 'admin/user-history',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin-panel/migration-users',
+                    'route' => 'admin/migration-users',
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
             ],

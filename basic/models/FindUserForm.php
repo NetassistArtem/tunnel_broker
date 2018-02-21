@@ -25,6 +25,7 @@ class FindUserForm extends Model
     {
         return [
             // username and password are both required
+           // [['email', 'ipv4', 'ipv6'], 'required'],
             [['email'], 'email'],
             ['ipv4', 'ip', 'ipv6' => false, 'subnet' => null],
             ['ipv6', 'ip', 'ipv4' => false, 'subnet' => null]

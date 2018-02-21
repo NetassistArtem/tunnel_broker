@@ -75,7 +75,6 @@ class RegistrationRequestForm extends Model
 
             }
         }
-
     }
 
     public function uniqueIp($attribute, $params){

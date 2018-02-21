@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'css/tb.css',
     ];
     public $js = [
+        'scripts/tb.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -105,7 +105,49 @@ $this->title = 'NetAssist IPv6 Tunnel Broker';
                     <span class="glyphicon glyphicon-refresh"></span></td>
             </tr>
             <tr id="change_email" class="collapse">
-                <td colspan="3">Смена email тест</td>
+                <td colspan="3">
+
+                    <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-10 col-md-10 col-lg-10">
+                        <div class=" panel panel-default custom-panel-style form-inside-styles">
+                            <div class="panel-heading">
+                                <h3>Change e-mail</h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php Pjax::begin(['id' => 'email-change']); ?>
+
+
+                                <?php $model_email_change_form = ActiveForm::begin([
+                                    'id' => 'modelEmailChangeForm',
+                                    'options' => ['data-pjax' => false],
+                                    'layout' => 'horizontal',
+                                    'fieldConfig' => [
+                                        'template' => "{label}\n<div class=\"col-lg-6 col-md-6 col-sm-6\">{input}</div>\n<div class=\"col-lg-3 col-md-3 col-sm-3\">{error}</div>",
+                                        'labelOptions' => ['class' => 'col-lg-3 col-md-3 col-sm-3 control-label'],
+                                    ],
+
+                                ]); ?>
+
+
+                                <?php $modelEmailChangeRequest->new_email = $user_data['email'];
+                                echo $model_email_change_form->field($modelEmailChangeRequest, 'new_email')->textInput()->label('New e-mail') ?>
+
+
+                                <div class="form-group">
+                                    <div
+                                        class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4">
+                                        <?= Html::submitButton('Change', ['class' => 'btn btn-primary btn-block btn-custom', 'name' => 'change-email-button']) ?>
+                                    </div>
+                                </div>
+
+                                <?php ActiveForm::end(); ?>
+                                <?php Pjax::end(); ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
             </tr>
             </tbody>
         </table>
